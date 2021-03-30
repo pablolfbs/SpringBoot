@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	 crossorigin="anonymous">
+
+	<title>Finalizar Compra</title>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="card-header">
+			<strong>Finalizar Compra</strong>
+		</div>
+		<div class="card-body">
+			<div th:if="${session.cart.isEmpty()}">
+				<h1 class="text-center">Nenhum item no carrinho!</h1>
+			</div>
+			<div th:unless="${session.cart.isEmpty()}" class="table-responsive">
+				<table class="table table-sm table-striped table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th>Preço</th>
+							<th>Quantidade</th>
+							<th>Método de Pagamento</th>
+							<th>Subtotal</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item : ${session.cart}">
+							<td th:text="${item.curso.id}"></td>
+							<td th:text="${item.curso.nome}"></td>
+							<td th:text="${'$ ' + #numbers.formatDecimal(item.curso.preco, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
+							<td th:text="${item.quantidade}"></td>
+							<td></td>
+							<td th:text="${'$ ' + #numbers.formatDecimal(item.quantidade * item.curso.preco, 0, 'DEFAULT', 2, 'DEFAULT')}">R$ </td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<td class="border-0"></td>
+							<td class="border-0"></td>
+							<td class="border-0"></td>
+							<td class="border-0"></td>
+							<td class="border-0 float-right text-danger">Total</td>
+							<td>??????</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="card-footer">
+			<a class="btn btn-sm btn-success" th:href="@{/index/}">Continuar comprando</a>
+			<a class="btn btn-sm btn-primary float-right" th:href="@{/finalizar/}">Finalizar a compra</a>
+		</div>
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	 crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	 crossorigin="anonymous"></script>
+</body>
+
+</html>
